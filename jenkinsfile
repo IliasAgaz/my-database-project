@@ -31,6 +31,6 @@ pipeline {
                     docker.image(DOCKER_IMAGE).run("-e MYSQL_ROOT_PASSWORD=W7301@jqir# -e MYSQL_DATABASE=001myproject  --name ${DOCKER_CONTAINER_NAME} -p 3306:3306")
                 }
             }
-        }
-    }
+}
+}
 }

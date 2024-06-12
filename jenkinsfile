@@ -32,13 +32,23 @@ pipeline {
             steps {
                 script {
                     bat """
-                    echo "Waiting for MySQL to be ready..."
-                    for /l %i in (1,1,30) do (
-                        docker exec mysql-container mysql -u root -p rootpassword -e "SELECT 1" && exit 0
-                        echo Waiting...
-                        timeout /t 5 >nul
+                    @echo off
+                    echo Waiting for MySQL to be ready...
+                    set count=0
+                    :loop
+                    set /a count+=1
+                    docker exec mysql-container mysql -u root -p rootpassword -e "SELECT 1"
+                    if %errorlevel%==0 (
+                        echo MySQL is ready!
+                        exit /b 0
                     )
-                    exit 1
+                    if %count%==30 (
+                        echo MySQL is not ready after 30 attempts, exiting...
+                        exit /b 1
+                    )
+                    echo Waiting...
+                    timeout /t 5 >nul
+                    goto loop
                     """
                 }
             }

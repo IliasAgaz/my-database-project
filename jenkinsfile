@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t custom-mysql ."
+                    bat "docker build -t custom-mysql ."
                 }
             }
         }
@@ -20,10 +20,10 @@ pipeline {
             steps {
                 script {
                     // Remove any existing container with the same name
-                    sh "docker rm -f mysql-container || true"
+                    bat "docker rm -f mysql-container || true"
 
                     // Run the MySQL container
-                    sh "docker run -d -p 3306 --name mysql-container custom-mysql"
+                    bat "docker run -d -p 3306 --name mysql-container custom-mysql"
                 }
             }
         }

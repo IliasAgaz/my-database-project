@@ -28,7 +28,7 @@ pipeline {
                     sh "docker rm -f ${DOCKER_CONTAINER_NAME} || true"
 
                     // Run the MySQL container
-                    sh "docker run -d --name ${DOCKER_CONTAINER_NAME} -e MYSQL_ROOT_PASSWORD=W7301@jqir# -e MYSQL_DATABASE=001myproject -p 3306:3306 ${DOCKER_IMAGE}"
+                    sh "docker run -d --name ${DOCKER_CONTAINER_NAME} -e MYSQL_ROOT_PASSWORD=rootpassword -e MYSQL_DATABASE=exampledb -p 3306 ${DOCKER_IMAGE}"
                 }
             }
         }

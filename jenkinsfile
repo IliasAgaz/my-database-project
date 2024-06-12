@@ -28,6 +28,21 @@ pipeline {
                 }
             }
         }
+        stage('Wait for MySQL') {
+            steps {
+                script {
+                    bat """
+                    echo "Waiting for MySQL to be ready..."
+                    for /l %i in (1,1,30) do (
+                        docker exec mysql-container mysql -u root -p rootpassword -e "SELECT 1" && exit 0
+                        echo Waiting...
+                        timeout /t 5 >nul
+                    )
+                    exit 1
+                    """
+                }
+            }
+        }
 
         stage('Initialize Database') {
             steps {

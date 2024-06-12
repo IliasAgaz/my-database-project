@@ -24,8 +24,16 @@ pipeline {
 
                     // Run the MySQL container
                     bat "docker run -d -p 3306 --name mysql-container custom-mysql"
-                    // connect to mysql server
-                    bat "docker exec -it mysql-container -u root -p rootpassword"
+                    
+                }
+            }
+        }
+
+        stage('Initialize Database') {
+            steps {
+                script {
+                    // Example of running a simple SQL command
+                    bat "docker exec mysql-container mysql -u root -p rootpassword -e \"CREATE DATABASE IF NOT EXISTS database-project;\""
                 }
             }
         }

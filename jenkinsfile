@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'mysql:latest'
+        DOCKER_IMAGE = 'custom-mysql'
         DOCKER_CONTAINER_NAME = 'mysql-container'
     }
 

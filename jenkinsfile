@@ -24,6 +24,8 @@ pipeline {
 
                     // Run the MySQL container
                     bat "docker run -d -p 3306 --name mysql-container custom-mysql"
+                    // connect to mysql server
+                    bat "docker exec -it mysql-container -u root -p rootpassword"
                 }
             }
         }

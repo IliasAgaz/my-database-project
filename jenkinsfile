@@ -28,14 +28,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Initialize Database') {
-            steps {
-                script {
-                    // Example of running a simple SQL command
-                    bat "docker exec mysql-container mysql -u root -p rootpassword -e \"CREATE DATABASE IF NOT EXISTS database-project;\""
-                }
-            }
-        }
     }
 }
